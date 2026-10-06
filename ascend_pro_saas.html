@@ -1,0 +1,1173 @@
+<!DOCTYPE html>
+<html lang="fr" class="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>Ascend Pro - SaaS Finance & Maîtrise Personnelle (Accès Illimité)</title>
+  <meta name="description" content="Plateforme SaaS d'ingénierie financière, gestion de patrimoine, rituels d'excellence et indépendance financière FIRE. Accès illimité sans quota d'utilisateurs." />
+  <meta name="theme-color" content="#090D16" />
+  <!-- Google Fonts Inter / Plus Jakarta Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+          },
+          colors: {
+            obsidian: '#090D16',
+            midnight: '#0F172A',
+            cardbg: '#162032',
+            elevated: '#1E293B',
+            bordersubtle: '#334155',
+            emeraldaccent: '#10B981',
+            emeraldglow: '#34D399',
+            goldaccent: '#F59E0B',
+            goldglow: '#FBBF24',
+            cyancyber: '#06B6D4',
+            coralred: '#EF4444'
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    body {
+      background-color: #090D16;
+      color: #F8FAFC;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .custom-scroll::-webkit-scrollbar { width: 4px; }
+    .custom-scroll::-webkit-scrollbar-thumb { background: #334155; border-radius: 4px; }
+    .glow-emerald { box-shadow: 0 0 25px -5px rgba(16, 185, 129, 0.25); }
+    .glow-gold { box-shadow: 0 0 25px -5px rgba(245, 158, 11, 0.25); }
+  </style>
+</head>
+<body class="bg-obsidian text-slate-100 min-h-screen flex flex-col pb-24 md:pb-8 selection:bg-emeraldaccent selection:text-black">
+
+  <!-- Top Header Navigation -->
+  <header class="sticky top-0 z-40 bg-midnight/90 backdrop-blur-md border-b border-bordersubtle px-4 py-3 sm:px-8">
+    <div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-3">
+      <div class="flex items-center space-x-3">
+        <div class="w-10 h-10 rounded-xl bg-goldaccent/20 border border-goldaccent/40 flex items-center justify-center text-goldaccent shadow-sm">
+          <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+          </svg>
+        </div>
+        <div>
+          <div class="flex items-center space-x-2">
+            <span class="font-extrabold text-lg tracking-wider text-slate-100">ASCEND PRO</span>
+            <span class="text-[10px] bg-emeraldaccent/20 text-emeraldglow px-2.5 py-0.5 rounded-full font-bold border border-emeraldaccent/40 flex items-center space-x-1">
+              <span class="w-1.5 h-1.5 rounded-full bg-emeraldglow animate-pulse"></span>
+              <span>ACCÈS ILLIMITÉ • SANS RESTRICTION</span>
+            </span>
+          </div>
+          <p class="text-xs text-slate-400">Système Exécutif de Finances & Maîtrise Personnelle</p>
+        </div>
+      </div>
+
+      <div class="flex items-center flex-wrap gap-2">
+        <!-- Profile / Multi-User Switcher -->
+        <div class="flex items-center bg-cardbg border border-bordersubtle rounded-xl px-2 py-1">
+          <span class="text-xs text-slate-400 mr-2 pl-1">Espace :</span>
+          <select id="user-profile-select" onchange="switchProfile(this.value)" class="bg-transparent text-xs font-semibold text-emeraldglow focus:outline-none cursor-pointer">
+            <option value="default" class="bg-midnight text-white">Directeur Principal (Vous)</option>
+            <option value="holding" class="bg-midnight text-white">Holding & Investissements</option>
+            <option value="famille" class="bg-midnight text-white">Espace Famille / Partenaire</option>
+            <option value="equipe" class="bg-midnight text-white">Équipe & Associés Pro</option>
+          </select>
+        </div>
+
+        <!-- Download Standalone HTML Button -->
+        <button onclick="downloadStandaloneCopy()" title="Télécharger le fichier sur votre appareil" class="text-xs bg-emeraldaccent hover:bg-emeraldglow text-obsidian font-bold px-3 py-1.5 rounded-xl transition flex items-center space-x-1 shadow-sm">
+          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
+          <span>Télécharger HTML</span>
+        </button>
+
+        <button onclick="exportJSON()" title="Sauvegarder mes données" class="text-xs bg-cardbg hover:bg-elevated text-slate-300 border border-bordersubtle font-semibold px-2.5 py-1.5 rounded-xl transition">
+          Export JSON
+        </button>
+
+        <button onclick="resetDemoData()" title="Réinitialiser" class="text-xs text-slate-400 hover:text-coralred px-2 py-1.5 transition">
+          ↺
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Banner Accès Illimité -->
+  <div class="bg-gradient-to-r from-emeraldaccent/15 via-midnight to-cyancyber/15 border-b border-bordersubtle px-4 py-2 text-center text-xs text-slate-300">
+    <span class="font-bold text-emeraldglow">✓ Licence Illimitée Active :</span> Aucune limite d'utilisateurs, aucun quota de 10 personnes. Ce fichier HTML fonctionne pour un nombre illimité de personnes et d'appareils.
+  </div>
+
+  <!-- Desktop Tab Bar -->
+  <nav class="hidden md:flex border-b border-bordersubtle bg-midnight/40 px-8 py-2">
+    <div class="max-w-7xl mx-auto flex space-x-4 w-full">
+      <button onclick="switchTab('dashboard')" id="dtab-dashboard" class="tab-btn px-4 py-2 rounded-lg text-sm font-semibold transition bg-cardbg text-emeraldglow border border-emeraldaccent/40">Tableau de Bord</button>
+      <button onclick="switchTab('finances')" id="dtab-finances" class="tab-btn px-4 py-2 rounded-lg text-sm font-semibold transition text-slate-400 hover:text-slate-200">Patrimoine & Flux</button>
+      <button onclick="switchTab('mastery')" id="dtab-mastery" class="tab-btn px-4 py-2 rounded-lg text-sm font-semibold transition text-slate-400 hover:text-slate-200">Habitudes & OKRs</button>
+      <button onclick="switchTab('simulator')" id="dtab-simulator" class="tab-btn px-4 py-2 rounded-lg text-sm font-semibold transition text-slate-400 hover:text-slate-200">Simulateur FIRE</button>
+      <button onclick="switchTab('journal')" id="dtab-journal" class="tab-btn px-4 py-2 rounded-lg text-sm font-semibold transition text-slate-400 hover:text-slate-200">Journal & Modèles Mentaux</button>
+    </div>
+  </nav>
+
+  <!-- Main Container -->
+  <main class="max-w-7xl mx-auto px-4 sm:px-8 py-6 w-full flex-grow">
+
+    <!-- TAB 1: DASHBOARD -->
+    <div id="tab-dashboard" class="space-y-6">
+      <!-- Executive Hero Banner -->
+      <div class="relative overflow-hidden rounded-2xl bg-gradient-to-r from-cardbg via-midnight to-cardbg border border-bordersubtle p-6 sm:p-8 glow-emerald">
+        <div class="flex flex-col md:flex-row md:items-center justify-between gap-6">
+          <div class="space-y-2">
+            <div class="inline-flex items-center space-x-2 bg-goldaccent/20 border border-goldaccent/30 text-goldglow text-xs px-3 py-1 rounded-full font-bold">
+              <span>✦ BILAN EXÉCUTIF ILLIMITÉ</span>
+            </div>
+            <h1 class="text-2xl sm:text-3xl font-extrabold text-white">Bonjour, Dirigeant de votre Vie</h1>
+            <p class="text-sm text-slate-400 max-w-xl">
+              Votre holding personnelle consolide <span id="hero-networth" class="text-emeraldglow font-bold">181 500 €</span> de valeur nette, avec un taux d'épargne de <span id="hero-savings-rate" class="text-goldglow font-bold">58%</span> et <span id="hero-runway" class="text-cyancyber font-bold">8.7 mois</span> de runway anti-fragile.
+            </p>
+          </div>
+          <div class="flex flex-wrap gap-3">
+            <button onclick="openModal('modal-asset')" class="bg-emeraldaccent text-obsidian hover:bg-emeraldglow px-4 py-2.5 rounded-xl font-bold text-sm shadow transition flex items-center space-x-2">
+              <span>+ Actif</span>
+            </button>
+            <button onclick="openModal('modal-tx')" class="bg-cardbg text-slate-200 border border-bordersubtle hover:bg-elevated px-4 py-2.5 rounded-xl font-semibold text-sm transition">
+              <span>+ Flux Trésorerie</span>
+            </button>
+            <button onclick="openModal('modal-journal')" class="bg-cardbg text-goldglow border border-goldaccent/40 hover:bg-elevated px-4 py-2.5 rounded-xl font-semibold text-sm transition">
+              <span>+ Débrief Soir</span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Core KPI Cards Grid -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        <!-- Net Worth -->
+        <div class="bg-cardbg border border-bordersubtle rounded-2xl p-5 hover:border-emeraldaccent/40 transition">
+          <div class="flex justify-between items-center text-xs text-slate-400 font-semibold uppercase tracking-wider">
+            <span>Valeur Nette Totale</span>
+            <span class="text-emeraldglow bg-emeraldaccent/10 px-2 py-0.5 rounded text-[11px] font-bold">+4.2%</span>
+          </div>
+          <div id="kpi-networth" class="text-2xl sm:text-3xl font-extrabold text-white mt-2">181 500 €</div>
+          <div class="text-xs text-slate-400 mt-1 flex justify-between">
+            <span>Actifs: <b id="kpi-gross-assets" class="text-emeraldglow">279 500 €</b></span>
+            <span>Dettes: <b id="kpi-liabilities" class="text-coralred">98 000 €</b></span>
+          </div>
+        </div>
+
+        <!-- Mastery Index -->
+        <div class="bg-cardbg border border-bordersubtle rounded-2xl p-5 hover:border-cyancyber/40 transition">
+          <div class="flex justify-between items-center text-xs text-slate-400 font-semibold uppercase tracking-wider">
+            <span>Score de Maîtrise</span>
+            <span class="text-cyancyber bg-cyancyber/10 px-2 py-0.5 rounded text-[11px] font-bold">Top 5% Tier</span>
+          </div>
+          <div id="kpi-mastery" class="text-2xl sm:text-3xl font-extrabold text-white mt-2">82 / 100</div>
+          <div class="text-xs text-slate-400 mt-1">
+            Indice pondéré (Habitudes + Épargne + OKRs)
+          </div>
+        </div>
+
+        <!-- Savings Rate -->
+        <div class="bg-cardbg border border-bordersubtle rounded-2xl p-5 hover:border-goldaccent/40 transition">
+          <div class="flex justify-between items-center text-xs text-slate-400 font-semibold uppercase tracking-wider">
+            <span>Taux d'Épargne</span>
+            <span class="text-goldglow bg-goldaccent/10 px-2 py-0.5 rounded text-[11px] font-bold">Objectif &gt; 20%</span>
+          </div>
+          <div id="kpi-savings-rate" class="text-2xl sm:text-3xl font-extrabold text-white mt-2">58 %</div>
+          <div class="text-xs text-slate-400 mt-1">
+            Flux net réinvesti : <b id="kpi-net-savings" class="text-emeraldglow">+3 920 €/m</b>
+          </div>
+        </div>
+
+        <!-- Runway -->
+        <div class="bg-cardbg border border-bordersubtle rounded-2xl p-5 hover:border-emeraldaccent/40 transition">
+          <div class="flex justify-between items-center text-xs text-slate-400 font-semibold uppercase tracking-wider">
+            <span>Runway Anti-Fragile</span>
+            <span class="text-emeraldglow bg-emeraldaccent/10 px-2 py-0.5 rounded text-[11px] font-bold">Sécurisé</span>
+          </div>
+          <div id="kpi-runway" class="text-2xl sm:text-3xl font-extrabold text-white mt-2">8.7 mois</div>
+          <div class="text-xs text-slate-400 mt-1">
+            Trésorerie liquide : <b id="kpi-liquid-cash" class="text-slate-200">18 200 €</b>
+          </div>
+        </div>
+      </div>
+
+      <!-- Asset Allocation & Daily Routines Split -->
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        <!-- Asset Allocation Bar -->
+        <div class="lg:col-span-1 bg-cardbg border border-bordersubtle rounded-2xl p-6 flex flex-col justify-between">
+          <div>
+            <h3 class="text-sm font-bold uppercase tracking-wider text-slate-300">Allocation d'Actifs</h3>
+            <p class="text-xs text-slate-400 mt-0.5">Diversification du portefeuille</p>
+
+            <!-- Multi-segment visual bar -->
+            <div id="allocation-bar" class="w-full h-3 rounded-full overflow-hidden flex mt-4 bg-midnight">
+              <!-- Dynamically populated -->
+            </div>
+
+            <div id="allocation-legend" class="mt-4 space-y-2 text-xs">
+              <!-- Dynamically populated -->
+            </div>
+          </div>
+
+          <button onclick="switchTab('finances')" class="mt-6 w-full py-2.5 bg-midnight hover:bg-elevated border border-bordersubtle rounded-xl text-xs font-semibold text-slate-300 transition">
+            Gérer les Actifs & Dettes →
+          </button>
+        </div>
+
+        <!-- Daily Excellence Routines -->
+        <div class="lg:col-span-2 bg-cardbg border border-bordersubtle rounded-2xl p-6">
+          <div class="flex items-center justify-between mb-4">
+            <div>
+              <h3 class="text-sm font-bold uppercase tracking-wider text-slate-300">Routines d'Excellence du Jour</h3>
+              <p class="text-xs text-slate-400 mt-0.5">Cliquez pour valider vos rituels d'aujourd'hui</p>
+            </div>
+            <span id="habits-counter-pill" class="text-xs bg-cyancyber/15 text-cyancyber font-bold px-2.5 py-1 rounded-lg border border-cyancyber/30">
+              4 / 6 Validées
+            </span>
+          </div>
+
+          <div id="dashboard-habits-list" class="space-y-2.5">
+            <!-- Dynamically populated habits -->
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB 2: FINANCES -->
+    <div id="tab-finances" class="hidden space-y-6">
+      <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+        <div>
+          <h2 class="text-xl font-extrabold text-white">Ingénierie Financière & Bilan</h2>
+          <p class="text-xs text-slate-400">Gestion de patrimoine, flux de trésorerie et audit budgétaire 50/30/20.</p>
+        </div>
+        <div class="flex gap-2">
+          <button onclick="openModal('modal-asset')" class="bg-emeraldaccent text-obsidian hover:bg-emeraldglow font-bold text-xs px-4 py-2 rounded-xl transition">
+            + Ajouter Actif / Dette
+          </button>
+          <button onclick="openModal('modal-tx')" class="bg-cyancyber text-obsidian hover:bg-cyan-300 font-bold text-xs px-4 py-2 rounded-xl transition">
+            + Nouveau Flux
+          </button>
+        </div>
+      </div>
+
+      <!-- 50/30/20 Budget Analysis -->
+      <div class="bg-cardbg border border-bordersubtle rounded-2xl p-6">
+        <h3 class="text-sm font-bold uppercase tracking-wider text-cyancyber mb-1">Audit Budgétaire Anti-Fragile (50 / 30 / 20)</h3>
+        <p class="text-xs text-slate-400 mb-4">Répartition recommandée calculée sur vos entrées de trésorerie mensuelles.</p>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <!-- 50% Needs -->
+          <div class="bg-midnight border border-bordersubtle rounded-xl p-4">
+            <div class="flex justify-between items-center text-xs">
+              <span class="font-bold text-slate-300">50% Besoins Fixes</span>
+              <span id="badge-needs" class="px-2 py-0.5 rounded text-[10px] font-bold bg-emeraldaccent/20 text-emeraldglow">Conforme</span>
+            </div>
+            <div id="val-needs" class="text-lg font-bold text-white mt-2">2 080 €</div>
+            <div id="target-needs" class="text-xs text-slate-400">Cible : 3 375 € max</div>
+            <div class="w-full bg-cardbg h-2 rounded-full mt-3 overflow-hidden">
+              <div id="bar-needs" class="bg-blue-500 h-full rounded-full" style="width: 31%;"></div>
+            </div>
+          </div>
+
+          <!-- 30% Wants -->
+          <div class="bg-midnight border border-bordersubtle rounded-xl p-4">
+            <div class="flex justify-between items-center text-xs">
+              <span class="font-bold text-slate-300">30% Confort & Lifestyle</span>
+              <span id="badge-wants" class="px-2 py-0.5 rounded text-[10px] font-bold bg-emeraldaccent/20 text-emeraldglow">Conforme</span>
+            </div>
+            <div id="val-wants" class="text-lg font-bold text-white mt-2">650 €</div>
+            <div id="target-wants" class="text-xs text-slate-400">Cible : 2 025 € max</div>
+            <div class="w-full bg-cardbg h-2 rounded-full mt-3 overflow-hidden">
+              <div id="bar-wants" class="bg-goldaccent h-full rounded-full" style="width: 10%;"></div>
+            </div>
+          </div>
+
+          <!-- 20% Savings -->
+          <div class="bg-midnight border border-bordersubtle rounded-xl p-4">
+            <div class="flex justify-between items-center text-xs">
+              <span class="font-bold text-slate-300">20% Épargne & Actifs</span>
+              <span id="badge-savings" class="px-2 py-0.5 rounded text-[10px] font-bold bg-emeraldaccent/20 text-emeraldglow">Optimal</span>
+            </div>
+            <div id="val-savings" class="text-lg font-bold text-white mt-2">1 500 €</div>
+            <div id="target-savings" class="text-xs text-slate-400">Cible : 1 350 € min</div>
+            <div class="w-full bg-cardbg h-2 rounded-full mt-3 overflow-hidden">
+              <div id="bar-savings" class="bg-emeraldaccent h-full rounded-full" style="width: 22%;"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Assets & Transactions Grid -->
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        <!-- Assets & Liabilities List -->
+        <div class="bg-cardbg border border-bordersubtle rounded-2xl p-6">
+          <div class="flex justify-between items-center mb-4">
+            <h3 class="text-sm font-bold uppercase tracking-wider text-slate-300">Actifs & Dettes</h3>
+            <span id="assets-count" class="text-xs text-slate-400">6 éléments</span>
+          </div>
+          <div id="assets-list" class="space-y-3">
+            <!-- Dynamically populated assets -->
+          </div>
+        </div>
+
+        <!-- Cashflow Transactions List -->
+        <div class="bg-cardbg border border-bordersubtle rounded-2xl p-6">
+          <div class="flex justify-between items-center mb-4">
+            <h3 class="text-sm font-bold uppercase tracking-wider text-slate-300">Flux de Trésorerie Récents</h3>
+            <span id="tx-count" class="text-xs text-slate-400">8 flux</span>
+          </div>
+          <div id="tx-list" class="space-y-3">
+            <!-- Dynamically populated transactions -->
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB 3: MASTERY (HABITS & OKRS) -->
+    <div id="tab-mastery" class="space-y-6 hidden">
+      <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+        <div>
+          <h2 class="text-xl font-extrabold text-white">Maîtrise Personnelle & OKRs</h2>
+          <p class="text-xs text-slate-400">Rituels quotidiens d'excellence et objectifs stratégiques trimestriels.</p>
+        </div>
+        <div class="flex gap-2">
+          <button onclick="openModal('modal-habit')" class="bg-cyancyber text-obsidian hover:bg-cyan-300 font-bold text-xs px-4 py-2 rounded-xl transition">
+            + Nouvelle Routine
+          </button>
+          <button onclick="openModal('modal-okr')" class="bg-goldaccent text-obsidian hover:bg-yellow-300 font-bold text-xs px-4 py-2 rounded-xl transition">
+            + Objectif OKR
+          </button>
+        </div>
+      </div>
+
+      <!-- Full Habits List -->
+      <div class="bg-cardbg border border-bordersubtle rounded-2xl p-6">
+        <h3 class="text-sm font-bold uppercase tracking-wider text-slate-300 mb-4">Rituels Quotidiens & Séries (Streaks)</h3>
+        <div id="full-habits-list" class="grid grid-cols-1 md:grid-cols-2 gap-3">
+          <!-- Dynamically populated -->
+        </div>
+      </div>
+
+      <!-- Strategic OKRs -->
+      <div class="bg-cardbg border border-bordersubtle rounded-2xl p-6">
+        <h3 class="text-sm font-bold uppercase tracking-wider text-goldaccent mb-4">Objectifs Stratégiques & Key Results</h3>
+        <div id="okrs-list" class="space-y-4">
+          <!-- Dynamically populated OKRs -->
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB 4: SIMULATOR (FIRE & COMPOUND INTEREST) -->
+    <div id="tab-simulator" class="space-y-6 hidden">
+      <div class="bg-gradient-to-r from-cardbg via-midnight to-cardbg border border-emeraldaccent/40 rounded-2xl p-6 sm:p-8 glow-emerald">
+        <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-6">
+          <div class="space-y-2">
+            <span class="text-xs font-bold text-emeraldglow bg-emeraldaccent/20 px-3 py-1 rounded-full border border-emeraldaccent/30">
+              MODÈLE 4% DE TRINITY (FIRE)
+            </span>
+            <h2 class="text-2xl sm:text-3xl font-extrabold text-white">Simulateur d'Indépendance Financière</h2>
+            <p class="text-xs sm:text-sm text-slate-400 max-w-xl">
+              Projette l'accumulation du capital et les revenus passifs générés à perpétuité par les intérêts composés.
+            </p>
+          </div>
+
+          <div class="bg-midnight/80 border border-bordersubtle rounded-2xl p-6 text-right">
+            <div class="text-xs text-slate-400 uppercase font-semibold">Patrimoine Estimé au Terme</div>
+            <div id="sim-final-capital" class="text-3xl sm:text-4xl font-extrabold text-emeraldglow mt-1">620 488 €</div>
+            <div class="text-xs text-slate-400 mt-1">
+              Gains en intérêts : <b id="sim-total-gains" class="text-emeraldglow">+300 488 €</b>
+            </div>
+          </div>
+        </div>
+
+        <div class="mt-6 border-t border-bordersubtle pt-6 grid grid-cols-1 sm:grid-cols-3 gap-4">
+          <div class="bg-cardbg/80 border border-bordersubtle rounded-xl p-4">
+            <div class="text-xs text-slate-400">Capital Propre Versé</div>
+            <div id="sim-invested" class="text-lg font-bold text-white mt-1">320 000 €</div>
+          </div>
+          <div class="bg-cardbg/80 border border-bordersubtle rounded-xl p-4">
+            <div class="text-xs text-slate-400">Seuil FIRE (25x Dépenses)</div>
+            <div id="sim-fire-target" class="text-lg font-bold text-goldglow mt-1">750 000 €</div>
+          </div>
+          <div class="bg-cardbg/80 border border-bordersubtle rounded-xl p-4">
+            <div class="text-xs text-slate-400">Temps pour FIRE</div>
+            <div id="sim-years-to-fire" class="text-lg font-bold text-cyancyber mt-1">17.2 ans</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Sliders Controls -->
+      <div class="bg-cardbg border border-bordersubtle rounded-2xl p-6 space-y-6">
+        <h3 class="text-sm font-bold uppercase tracking-wider text-slate-300">Paramètres de Modélisation</h3>
+
+        <!-- Initial Capital -->
+        <div class="space-y-2">
+          <div class="flex justify-between text-xs sm:text-sm">
+            <span class="text-slate-400">Capital Initial :</span>
+            <span id="label-init-cap" class="font-bold text-white">50 000 €</span>
+          </div>
+          <input type="range" id="input-init-cap" min="0" max="200000" step="5000" value="50000" oninput="runSimulation()" class="w-full accent-emeraldaccent h-2 bg-midnight rounded-lg cursor-pointer">
+        </div>
+
+        <!-- Monthly Savings -->
+        <div class="space-y-2">
+          <div class="flex justify-between text-xs sm:text-sm">
+            <span class="text-slate-400">Épargne Mensuelle Réinvestie (DCA) :</span>
+            <span id="label-monthly-savings" class="font-bold text-white">1 500 € / mois</span>
+          </div>
+          <input type="range" id="input-monthly-savings" min="100" max="5000" step="50" value="1500" oninput="runSimulation()" class="w-full accent-emeraldaccent h-2 bg-midnight rounded-lg cursor-pointer">
+        </div>
+
+        <!-- Return Rate -->
+        <div class="space-y-2">
+          <div class="flex justify-between text-xs sm:text-sm">
+            <span class="text-slate-400">Rendement Annuel Moyen (ETF / Bourse) :</span>
+            <span id="label-return-rate" class="font-bold text-white">8.0 %</span>
+          </div>
+          <input type="range" id="input-return-rate" min="3" max="15" step="0.5" value="8" oninput="runSimulation()" class="w-full accent-goldaccent h-2 bg-midnight rounded-lg cursor-pointer">
+        </div>
+
+        <!-- Horizon Years -->
+        <div class="space-y-2">
+          <div class="flex justify-between text-xs sm:text-sm">
+            <span class="text-slate-400">Horizon Temporel :</span>
+            <span id="label-horizon" class="font-bold text-white">15 ans</span>
+          </div>
+          <input type="range" id="input-horizon" min="1" max="35" step="1" value="15" oninput="runSimulation()" class="w-full accent-cyancyber h-2 bg-midnight rounded-lg cursor-pointer">
+        </div>
+
+        <!-- Annual Expenses (FIRE Target) -->
+        <div class="space-y-2">
+          <div class="flex justify-between text-xs sm:text-sm">
+            <span class="text-slate-400">Dépenses Annuelles Désirées en Liberté :</span>
+            <span id="label-expenses" class="font-bold text-white">30 000 € / an</span>
+          </div>
+          <input type="range" id="input-expenses" min="15000" max="100000" step="2500" value="30000" oninput="runSimulation()" class="w-full accent-coralred h-2 bg-midnight rounded-lg cursor-pointer">
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB 5: JOURNAL & MENTAL MODELS -->
+    <div id="tab-journal" class="space-y-6 hidden">
+      <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+        <div>
+          <h2 class="text-xl font-extrabold text-white">Journal Exécutif & Modèles Mentaux</h2>
+          <p class="text-xs text-slate-400">Prise de décision, clarté mentale et principes intemporels de leadership.</p>
+        </div>
+        <button onclick="openModal('modal-journal')" class="bg-goldaccent text-obsidian hover:bg-yellow-300 font-bold text-xs px-4 py-2 rounded-xl transition">
+          + Rédiger le Débriefing du Soir
+        </button>
+      </div>
+
+      <!-- Principles Grid -->
+      <div class="space-y-4">
+        <h3 class="text-sm font-bold uppercase tracking-wider text-cyancyber">Bibliothèque de Principes (Ray Dalio, Naval, Munger)</h3>
+        <div id="principles-list" class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <!-- Dynamically populated -->
+        </div>
+      </div>
+
+      <!-- Journal Entries History -->
+      <div class="bg-cardbg border border-bordersubtle rounded-2xl p-6 mt-6">
+        <h3 class="text-sm font-bold uppercase tracking-wider text-slate-300 mb-4">Historique des Débriefings Stratégiques</h3>
+        <div id="journal-list" class="space-y-4">
+          <!-- Dynamically populated -->
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- Mobile Bottom Navigation Bar -->
+  <nav class="md:hidden fixed bottom-0 left-0 right-0 z-40 bg-midnight/95 backdrop-blur-md border-t border-bordersubtle py-2 px-3">
+    <div class="grid grid-cols-5 text-center">
+      <button onclick="switchTab('dashboard')" id="mtab-dashboard" class="flex flex-col items-center py-1 text-emeraldglow">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"/></svg>
+        <span class="text-[10px] font-semibold mt-1">Tableau</span>
+      </button>
+
+      <button onclick="switchTab('finances')" id="mtab-finances" class="flex flex-col items-center py-1 text-slate-400">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+        <span class="text-[10px] font-semibold mt-1">Finances</span>
+      </button>
+
+      <button onclick="switchTab('mastery')" id="mtab-mastery" class="flex flex-col items-center py-1 text-slate-400">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+        <span class="text-[10px] font-semibold mt-1">Maîtrise</span>
+      </button>
+
+      <button onclick="switchTab('simulator')" id="mtab-simulator" class="flex flex-col items-center py-1 text-slate-400">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"/></svg>
+        <span class="text-[10px] font-semibold mt-1">FIRE Pro</span>
+      </button>
+
+      <button onclick="switchTab('journal')" id="mtab-journal" class="flex flex-col items-center py-1 text-slate-400">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/></svg>
+        <span class="text-[10px] font-semibold mt-1">Journal</span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- MODAL: ADD ASSET -->
+  <div id="modal-asset" class="fixed inset-0 z-50 bg-black/70 backdrop-blur-sm hidden flex items-center justify-center p-4">
+    <div class="bg-cardbg border border-bordersubtle rounded-2xl max-w-md w-full p-6 space-y-4">
+      <h3 class="text-lg font-bold text-white">Ajouter un Actif ou Passif</h3>
+      <div class="space-y-3">
+        <div>
+          <label class="text-xs text-slate-400">Nom</label>
+          <input type="text" id="asset-name" placeholder="ex. PEA MSCI World, T2 Locatif..." class="w-full bg-midnight border border-bordersubtle rounded-xl px-3 py-2 text-sm text-white focus:outline-none focus:border-emeraldaccent">
+        </div>
+        <div>
+          <label class="text-xs text-slate-400">Valeur (€)</label>
+          <input type="number" id="asset-value" placeholder="ex. 25000" class="w-full bg-midnight border border-bordersubtle rounded-xl px-3 py-2 text-sm text-white focus:outline-none focus:border-emeraldaccent">
+        </div>
+        <div>
+          <label class="text-xs text-slate-400">Catégorie</label>
+          <select id="asset-cat" class="w-full bg-midnight border border-bordersubtle rounded-xl px-3 py-2 text-sm text-white focus:outline-none focus:border-emeraldaccent">
+            <option value="INVESTISSEMENT">Investissement (ETF / Actions)</option>
+            <option value="IMMOBILIER">Immobilier</option>
+            <option value="LIQUIDITES">Liquidités & Épargne</option>
+            <option value="BUSINESS">Business / Holding</option>
+            <option value="CRYPTO">Crypto Assets</option>
+            <option value="DETTE_PASSIF">Passif / Emprunt (-)</option>
+          </select>
+        </div>
+      </div>
+      <div class="flex justify-end space-x-2 pt-2">
+        <button onclick="closeModal('modal-asset')" class="px-4 py-2 text-xs text-slate-400 hover:text-white">Annuler</button>
+        <button onclick="saveAsset()" class="px-4 py-2 bg-emeraldaccent text-obsidian font-bold text-xs rounded-xl hover:bg-emeraldglow">Enregistrer</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL: ADD TX -->
+  <div id="modal-tx" class="fixed inset-0 z-50 bg-black/70 backdrop-blur-sm hidden flex items-center justify-center p-4">
+    <div class="bg-cardbg border border-bordersubtle rounded-2xl max-w-md w-full p-6 space-y-4">
+      <h3 class="text-lg font-bold text-white">Nouveau Flux de Trésorerie</h3>
+      <div class="space-y-3">
+        <div>
+          <label class="text-xs text-slate-400">Type de Flux</label>
+          <select id="tx-type" class="w-full bg-midnight border border-bordersubtle rounded-xl px-3 py-2 text-sm text-white focus:outline-none focus:border-emeraldaccent">
+            <option value="EXPENSE">Dépense (-)</option>
+            <option value="INCOME">Revenu (+)</option>
+          </select>
+        </div>
+        <div>
+          <label class="text-xs text-slate-400">Libellé</label>
+          <input type="text" id="tx-title" placeholder="ex. Loyer, Revenu SaaS..." class="w-full bg-midnight border border-bordersubtle rounded-xl px-3 py-2 text-sm text-white focus:outline-none focus:border-emeraldaccent">
+        </div>
+        <div>
+          <label class="text-xs text-slate-400">Montant (€)</label>
+          <input type="number" id="tx-amount" placeholder="ex. 450" class="w-full bg-midnight border border-bordersubtle rounded-xl px-3 py-2 text-sm text-white focus:outline-none focus:border-emeraldaccent">
+        </div>
+        <div>
+          <label class="text-xs text-slate-400">Catégorie</label>
+          <select id="tx-cat" class="w-full bg-midnight border border-bordersubtle rounded-xl px-3 py-2 text-sm text-white focus:outline-none focus:border-emeraldaccent">
+            <option value="BESOINS_50">Besoins Fixes (50%)</option>
+            <option value="ENVIE_30">Plaisir & Lifestyle (30%)</option>
+            <option value="EPARGNE_20">Épargne & Investissement (20%)</option>
+          </select>
+        </div>
+      </div>
+      <div class="flex justify-end space-x-2 pt-2">
+        <button onclick="closeModal('modal-tx')" class="px-4 py-2 text-xs text-slate-400 hover:text-white">Annuler</button>
+        <button onclick="saveTx()" class="px-4 py-2 bg-cyancyber text-obsidian font-bold text-xs rounded-xl hover:bg-cyan-300">Enregistrer</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL: ADD HABIT -->
+  <div id="modal-habit" class="fixed inset-0 z-50 bg-black/70 backdrop-blur-sm hidden flex items-center justify-center p-4">
+    <div class="bg-cardbg border border-bordersubtle rounded-2xl max-w-md w-full p-6 space-y-4">
+      <h3 class="text-lg font-bold text-white">Nouvelle Routine d'Excellence</h3>
+      <div class="space-y-3">
+        <div>
+          <label class="text-xs text-slate-400">Titre</label>
+          <input type="text" id="habit-title" placeholder="ex. Méditation 15min, Deep work 90min..." class="w-full bg-midnight border border-bordersubtle rounded-xl px-3 py-2 text-sm text-white focus:outline-none focus:border-cyancyber">
+        </div>
+        <div>
+          <label class="text-xs text-slate-400">Pilier</label>
+          <select id="habit-cat" class="w-full bg-midnight border border-bordersubtle rounded-xl px-3 py-2 text-sm text-white focus:outline-none focus:border-cyancyber">
+            <option value="MINDSET">Clarté Mentale</option>
+            <option value="DEEP_WORK">Focus & Deep Work</option>
+            <option value="SANTE">Santé & Énergie</option>
+            <option value="FINANCES">Discipline Financière</option>
+          </select>
+        </div>
+      </div>
+      <div class="flex justify-end space-x-2 pt-2">
+        <button onclick="closeModal('modal-habit')" class="px-4 py-2 text-xs text-slate-400 hover:text-white">Annuler</button>
+        <button onclick="saveHabit()" class="px-4 py-2 bg-cyancyber text-obsidian font-bold text-xs rounded-xl hover:bg-cyan-300">Créer</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL: ADD OKR -->
+  <div id="modal-okr" class="fixed inset-0 z-50 bg-black/70 backdrop-blur-sm hidden flex items-center justify-center p-4">
+    <div class="bg-cardbg border border-bordersubtle rounded-2xl max-w-md w-full p-6 space-y-4">
+      <h3 class="text-lg font-bold text-white">Définir un Objectif OKR</h3>
+      <div class="space-y-3">
+        <div>
+          <label class="text-xs text-slate-400">Intitulé Cible</label>
+          <input type="text" id="okr-title" placeholder="ex. 100k€ d'actifs liquides, 15 livres..." class="w-full bg-midnight border border-bordersubtle rounded-xl px-3 py-2 text-sm text-white focus:outline-none focus:border-goldaccent">
+        </div>
+        <div class="grid grid-cols-3 gap-2">
+          <div>
+            <label class="text-xs text-slate-400">Actuel</label>
+            <input type="number" id="okr-cur" value="0" class="w-full bg-midnight border border-bordersubtle rounded-xl px-3 py-2 text-sm text-white focus:outline-none focus:border-goldaccent">
+          </div>
+          <div>
+            <label class="text-xs text-slate-400">Cible</label>
+            <input type="number" id="okr-tgt" value="100" class="w-full bg-midnight border border-bordersubtle rounded-xl px-3 py-2 text-sm text-white focus:outline-none focus:border-goldaccent">
+          </div>
+          <div>
+            <label class="text-xs text-slate-400">Unité</label>
+            <input type="text" id="okr-unit" value="€" class="w-full bg-midnight border border-bordersubtle rounded-xl px-3 py-2 text-sm text-white focus:outline-none focus:border-goldaccent">
+          </div>
+        </div>
+      </div>
+      <div class="flex justify-end space-x-2 pt-2">
+        <button onclick="closeModal('modal-okr')" class="px-4 py-2 text-xs text-slate-400 hover:text-white">Annuler</button>
+        <button onclick="saveOkr()" class="px-4 py-2 bg-goldaccent text-obsidian font-bold text-xs rounded-xl hover:bg-yellow-300">Activer</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL: ADD JOURNAL -->
+  <div id="modal-journal" class="fixed inset-0 z-50 bg-black/70 backdrop-blur-sm hidden flex items-center justify-center p-4">
+    <div class="bg-cardbg border border-bordersubtle rounded-2xl max-w-md w-full p-6 space-y-4">
+      <h3 class="text-lg font-bold text-white">Débriefing Stratégique Exécutif</h3>
+      <div class="space-y-3">
+        <div>
+          <label class="text-xs text-slate-400">Victoires & Réalisations Clés</label>
+          <textarea id="journal-wins" rows="2" placeholder="ex. DCA 1 500€ investi, séance de sport, 90min Deep work..." class="w-full bg-midnight border border-bordersubtle rounded-xl px-3 py-2 text-sm text-white focus:outline-none focus:border-goldaccent"></textarea>
+        </div>
+        <div>
+          <label class="text-xs text-slate-400">Leçon Stratégique / Principe Appliqué</label>
+          <textarea id="journal-lesson" rows="2" placeholder="ex. Principe Dalio : confronter la réalité sans délai..." class="w-full bg-midnight border border-bordersubtle rounded-xl px-3 py-2 text-sm text-white focus:outline-none focus:border-goldaccent"></textarea>
+        </div>
+      </div>
+      <div class="flex justify-end space-x-2 pt-2">
+        <button onclick="closeModal('modal-journal')" class="px-4 py-2 text-xs text-slate-400 hover:text-white">Annuler</button>
+        <button onclick="saveJournal()" class="px-4 py-2 bg-goldaccent text-obsidian font-bold text-xs rounded-xl hover:bg-yellow-300">Enregistrer</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- APPLICATION DATA ENGINE -->
+  <script>
+    // Initial Seed Data Template
+    const defaultData = {
+      assets: [
+        { id: 1, name: "Portefeuille PEA ETF MSCI World", category: "INVESTISSEMENT", value: 68500, isLiability: false },
+        { id: 2, name: "Appartement Locatif T2 Lyon", category: "IMMOBILIER", value: 145000, isLiability: false },
+        { id: 3, name: "Trésorerie & Matelas de Sécurité", category: "LIQUIDITES", value: 18200, isLiability: false },
+        { id: 4, name: "Holding Micro-SaaS Digital Equity", category: "BUSINESS", value: 35000, isLiability: false },
+        { id: 5, name: "Cold Storage Bitcoin & Ethereum", category: "CRYPTO", value: 12800, isLiability: false },
+        { id: 6, name: "Emprunt Bancaire Immo Lyon", category: "DETTE_PASSIF", value: 98000, isLiability: true }
+      ],
+      transactions: [
+        { id: 1, title: "Revenu Principal Exécutif", amount: 4800, type: "INCOME", category: "SALAIRE" },
+        { id: 2, title: "Loyer Net Locatif Lyon", amount: 750, type: "INCOME", category: "DIVIDENDES" },
+        { id: 3, title: "Revenus Récurrents SaaS", amount: 1200, type: "INCOME", category: "BUSINESS" },
+        { id: 4, title: "Loyer Résidence & Charges", amount: 1350, type: "EXPENSE", category: "BESOINS_50" },
+        { id: 5, title: "Alimentation Santé Bio", amount: 550, type: "EXPENSE", category: "BESOINS_50" },
+        { id: 6, title: "Abonnements SaaS & Cloud", amount: 180, type: "EXPENSE", category: "BESOINS_50" },
+        { id: 7, title: "Expériences & Lifestyle", amount: 650, type: "EXPENSE", category: "ENVIE_30" },
+        { id: 8, title: "DCA Automatisé ETF World", amount: 1500, type: "EXPENSE", category: "EPARGNE_20" }
+      ],
+      habits: [
+        { id: 1, title: "Méditation & Clarté Mentale (15 min)", category: "MINDSET", streak: 14, completed: true, weight: 10 },
+        { id: 2, title: "Session Deep Work Focus (90 min)", category: "DEEP_WORK", streak: 9, completed: true, weight: 15 },
+        { id: 3, title: "Lecture Finance & Stratégie (30 min)", category: "MINDSET", streak: 21, completed: false, weight: 10 },
+        { id: 4, title: "Entraînement Athlétique / HIIT", category: "SANTE", streak: 5, completed: true, weight: 15 },
+        { id: 5, title: "Zéro Dépense Impulsive", category: "FINANCES", streak: 30, completed: true, weight: 15 },
+        { id: 6, title: "Bilan Exécutif & Débriefing du Soir", category: "DEEP_WORK", streak: 12, completed: false, weight: 10 }
+      ],
+      okrs: [
+        { id: 1, title: "Portefeuille Actifs Liquides 100k€", current: 86700, target: 100000, unit: "€" },
+        { id: 2, title: "Maîtriser 15 Livres de Finance & Leadership", current: 9, target: 15, unit: "livres" },
+        { id: 3, title: "MRR SaaS Récurrent à 3 000€/m", current: 1950, target: 3000, unit: "€/m" },
+        { id: 4, title: "Condition Métabolique & Vo2Max", current: 44.5, target: 50, unit: "ml/kg" }
+      ],
+      principles: [
+        { title: "Réalité + Rêves + Détermination = Vie Réussie", author: "Ray Dalio", tag: "STRATÉGIE", desc: "Regardez la réalité en face sans complaisance. Traitez chaque revers financier ou personnel comme un problème mathématique à résoudre.", action: "Confronter immédiatement les chiffres réels sans dissimulation." },
+        { title: "L'Effet Cumulé des Habitudes & du Capital", author: "Darren Hardy & James Clear", tag: "DISCIPLINE", desc: "De minuscules améliorations de 1% composent un progrès exponentiel (1.01^365 = 37.8). L'épargne investie chaque mois suit la même loi mathématique.", action: "Automatiser chaque mois votre virement vers vos actifs le jour de paie." },
+        { title: "Les 4 Leviers de Richesse de Naval", author: "Naval Ravikant", tag: "VALEUR", desc: "La fortune se construit par le code, les médias, le capital et les talents. Le code et les médias travaillent 24h/24 sans coût marginal.", action: "Bâtir des actifs numériques scalables au lieu de vendre uniquement son temps." },
+        { title: "Principe d'Inversion", author: "Charlie Munger", tag: "DÉCISION", desc: "Au lieu de chercher comment réussir, listez ce qui garantit l'échec et évitez-le rigoureusement (dettes toxiques, ego, manque de sommeil).", action: "Éliminer les risques d'anéantissement avant de chercher le gain." }
+      ],
+      journal: [
+        { id: 1, date: "Aujourd'hui", wins: "Négociation contrat SaaS conclue (+1 200€/mois) & DCA de 1 500€ investi.", lesson: "Principe Dalio appliqué : confrontation directe aux faits sans délai." },
+        { id: 2, date: "Hier", wins: "Session de 90 min de Deep Work sans distraction + 30 min de lecture financière.", lesson: "Inversion de Munger : éliminer les distractions élimine 80% des erreurs." }
+      ]
+    };
+
+    let currentProfile = 'default';
+    function getStorageKey() { return 'ascend_pro_data_' + currentProfile; }
+
+    let appData = JSON.parse(localStorage.getItem(getStorageKey())) || defaultData;
+
+    function switchProfile(profileId) {
+      currentProfile = profileId;
+      appData = JSON.parse(localStorage.getItem(getStorageKey())) || JSON.parse(JSON.stringify(defaultData));
+      renderAll();
+    }
+
+    function saveData() {
+      localStorage.setItem(getStorageKey(), JSON.stringify(appData));
+      renderAll();
+    }
+
+    function resetDemoData() {
+      if (confirm("Réinitialiser les données de cet espace ?")) {
+        appData = JSON.parse(JSON.stringify(defaultData));
+        saveData();
+      }
+    }
+
+    function downloadStandaloneCopy() {
+      const htmlContent = document.documentElement.outerHTML;
+      const blob = new Blob([htmlContent], { type: "text/html;charset=utf-8" });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = "Ascend_Pro_SaaS_Illimite.html";
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+    }
+
+    function exportJSON() {
+      const blob = new Blob([JSON.stringify(appData, null, 2)], { type: "application/json" });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = "ascend_pro_data_" + currentProfile + ".json";
+      a.click();
+    }
+
+    function formatCur(val) {
+      return new Intl.NumberFormat('fr-FR', { style: 'currency', currency: 'EUR', maximumFractionDigits: 0 }).format(val);
+    }
+
+    // Tab Switching
+    function switchTab(tabId) {
+      ['dashboard', 'finances', 'mastery', 'simulator', 'journal'].forEach(t => {
+        const el = document.getElementById('tab-' + t);
+        const del = document.getElementById('dtab-' + t);
+        const mel = document.getElementById('mtab-' + t);
+        if (el) el.classList.toggle('hidden', t !== tabId);
+        if (del) {
+          del.classList.toggle('bg-cardbg', t === tabId);
+          del.classList.toggle('text-emeraldglow', t === tabId);
+          del.classList.toggle('border', t === tabId);
+          del.classList.toggle('border-emeraldaccent/40', t === tabId);
+          del.classList.toggle('text-slate-400', t !== tabId);
+        }
+        if (mel) {
+          mel.classList.toggle('text-emeraldglow', t === tabId);
+          mel.classList.toggle('text-slate-400', t !== tabId);
+        }
+      });
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    // Render Dashboard & KPIs
+    function renderDashboard() {
+      const grossAssets = appData.assets.filter(a => !a.isLiability).reduce((s, a) => s + a.value, 0);
+      const liabilities = appData.assets.filter(a => a.isLiability).reduce((s, a) => s + a.value, 0);
+      const netWorth = grossAssets - liabilities;
+
+      const income = appData.transactions.filter(t => t.type === 'INCOME').reduce((s, t) => s + t.amount, 0);
+      const expenses = appData.transactions.filter(t => t.type === 'EXPENSE').reduce((s, t) => s + t.amount, 0);
+      const netSavings = income - expenses;
+      const savingsRate = income > 0 ? Math.round((netSavings / income) * 100) : 0;
+
+      const liquid = appData.assets.filter(a => a.category === 'LIQUIDITES').reduce((s, a) => s + a.value, 0);
+      const runway = expenses > 0 ? (liquid / expenses).toFixed(1) : 12;
+
+      const compHabits = appData.habits.filter(h => h.completed).length;
+      const totalHabits = appData.habits.length;
+      const habitScore = totalHabits > 0 ? (compHabits / totalHabits) * 100 : 0;
+      const mastery = Math.round(habitScore * 0.45 + Math.min(savingsRate, 100) * 0.30 + 75 * 0.25);
+
+      // Hero
+      document.getElementById('hero-networth').textContent = formatCur(netWorth);
+      document.getElementById('hero-savings-rate').textContent = savingsRate + '%';
+      document.getElementById('hero-runway').textContent = runway + ' mois';
+
+      // KPI Cards
+      document.getElementById('kpi-networth').textContent = formatCur(netWorth);
+      document.getElementById('kpi-gross-assets').textContent = formatCur(grossAssets);
+      document.getElementById('kpi-liabilities').textContent = formatCur(liabilities);
+      document.getElementById('kpi-mastery').textContent = mastery + ' / 100';
+      document.getElementById('kpi-savings-rate').textContent = savingsRate + ' %';
+      document.getElementById('kpi-net-savings').textContent = (netSavings >= 0 ? '+' : '') + formatCur(netSavings) + '/m';
+      document.getElementById('kpi-runway').textContent = runway + ' mois';
+      document.getElementById('kpi-liquid-cash').textContent = formatCur(liquid);
+      document.getElementById('habits-counter-pill').textContent = `${compHabits} / ${totalHabits} Validées`;
+
+      // Allocation Bar
+      const colors = {
+        'INVESTISSEMENT': '#3B82F6',
+        'IMMOBILIER': '#10B981',
+        'LIQUIDITES': '#F59E0B',
+        'BUSINESS': '#8B5CF6',
+        'CRYPTO': '#06B6D4'
+      };
+      const catTotals = {};
+      appData.assets.filter(a => !a.isLiability).forEach(a => {
+        catTotals[a.category] = (catTotals[a.category] || 0) + a.value;
+      });
+
+      const barEl = document.getElementById('allocation-bar');
+      const legendEl = document.getElementById('allocation-legend');
+      barEl.innerHTML = '';
+      legendEl.innerHTML = '';
+
+      Object.entries(catTotals).forEach(([cat, val]) => {
+        const pct = grossAssets > 0 ? Math.round((val / grossAssets) * 100) : 0;
+        const color = colors[cat] || '#94A3B8';
+        if (pct > 0) {
+          const seg = document.createElement('div');
+          seg.style.width = pct + '%';
+          seg.style.backgroundColor = color;
+          barEl.appendChild(seg);
+
+          const leg = document.createElement('div');
+          leg.className = 'flex justify-between items-center';
+          leg.innerHTML = `<span class="flex items-center"><span class="w-2.5 h-2.5 rounded-full mr-2" style="background:${color}"></span>${cat}</span><b class="text-white">${pct}% (${formatCur(val)})</b>`;
+          legendEl.appendChild(leg);
+        }
+      });
+
+      // Dashboard Habits
+      const dHabitsEl = document.getElementById('dashboard-habits-list');
+      dHabitsEl.innerHTML = '';
+      appData.habits.forEach(h => {
+        const item = document.createElement('div');
+        item.className = `flex items-center justify-between p-3.5 rounded-xl border cursor-pointer transition ${h.completed ? 'bg-elevated border-cyancyber/40' : 'bg-cardbg border-bordersubtle hover:border-slate-500'}`;
+        item.onclick = () => toggleHabit(h.id);
+        item.innerHTML = `
+          <div class="flex items-center space-x-3">
+            <div class="w-6 h-6 rounded-full flex items-center justify-center ${h.completed ? 'bg-cyancyber text-obsidian font-bold' : 'border border-slate-500 text-transparent'}">
+              ✓
+            </div>
+            <div>
+              <div class="text-sm font-semibold ${h.completed ? 'text-white' : 'text-slate-300'}">${h.title}</div>
+              <div class="text-xs text-slate-400">${h.category} • Série : <span class="text-goldglow font-bold">${h.streak} jours</span></div>
+            </div>
+          </div>
+          <span class="text-xs font-bold text-cyancyber">+${h.weight} pts</span>
+        `;
+        dHabitsEl.appendChild(item);
+      });
+    }
+
+    // Toggle Habit
+    function toggleHabit(id) {
+      const h = appData.habits.find(item => item.id === id);
+      if (h) {
+        h.completed = !h.completed;
+        h.streak = h.completed ? h.streak + 1 : Math.max(0, h.streak - 1);
+        saveData();
+      }
+    }
+
+    // Render Finances Tab
+    function renderFinances() {
+      const income = appData.transactions.filter(t => t.type === 'INCOME').reduce((s, t) => s + t.amount, 0);
+      const expenses = appData.transactions.filter(t => t.type === 'EXPENSE');
+
+      const needs = expenses.filter(t => t.category === 'BESOINS_50').reduce((s, t) => s + t.amount, 0);
+      const wants = expenses.filter(t => t.category === 'ENVIE_30').reduce((s, t) => s + t.amount, 0);
+      const savings = expenses.filter(t => t.category === 'EPARGNE_20').reduce((s, t) => s + t.amount, 0);
+
+      document.getElementById('val-needs').textContent = formatCur(needs);
+      document.getElementById('target-needs').textContent = `Cible : ${formatCur(income * 0.50)} max`;
+      document.getElementById('bar-needs').style.width = Math.min((needs / Math.max(1, income)) * 100, 100) + '%';
+
+      document.getElementById('val-wants').textContent = formatCur(wants);
+      document.getElementById('target-wants').textContent = `Cible : ${formatCur(income * 0.30)} max`;
+      document.getElementById('bar-wants').style.width = Math.min((wants / Math.max(1, income)) * 100, 100) + '%';
+
+      document.getElementById('val-savings').textContent = formatCur(savings);
+      document.getElementById('target-savings').textContent = `Cible : ${formatCur(income * 0.20)} min`;
+      document.getElementById('bar-savings').style.width = Math.min((savings / Math.max(1, income)) * 100, 100) + '%';
+
+      // Assets List
+      const aList = document.getElementById('assets-list');
+      aList.innerHTML = '';
+      appData.assets.forEach(a => {
+        const item = document.createElement('div');
+        item.className = 'flex justify-between items-center p-3 rounded-xl bg-midnight border border-bordersubtle';
+        item.innerHTML = `
+          <div>
+            <div class="text-sm font-semibold text-white">${a.name}</div>
+            <div class="text-xs text-slate-400">${a.category}</div>
+          </div>
+          <div class="flex items-center space-x-3">
+            <span class="text-sm font-bold ${a.isLiability ? 'text-coralred' : 'text-emeraldglow'}">${a.isLiability ? '-' : '+'}${formatCur(a.value)}</span>
+            <button onclick="deleteAsset(${a.id})" class="text-slate-500 hover:text-coralred text-xs">✕</button>
+          </div>
+        `;
+        aList.appendChild(item);
+      });
+      document.getElementById('assets-count').textContent = appData.assets.length + ' éléments';
+
+      // TX List
+      const tList = document.getElementById('tx-list');
+      tList.innerHTML = '';
+      appData.transactions.forEach(t => {
+        const isInc = t.type === 'INCOME';
+        const item = document.createElement('div');
+        item.className = 'flex justify-between items-center p-3 rounded-xl bg-midnight border border-bordersubtle';
+        item.innerHTML = `
+          <div>
+            <div class="text-sm font-semibold text-white">${t.title}</div>
+            <div class="text-xs text-slate-400">${t.category}</div>
+          </div>
+          <div class="flex items-center space-x-3">
+            <span class="text-sm font-bold ${isInc ? 'text-emeraldglow' : 'text-coralred'}">${isInc ? '+' : '-'}${formatCur(t.amount)}</span>
+            <button onclick="deleteTx(${t.id})" class="text-slate-500 hover:text-coralred text-xs">✕</button>
+          </div>
+        `;
+        tList.appendChild(item);
+      });
+      document.getElementById('tx-count').textContent = appData.transactions.length + ' flux';
+    }
+
+    function deleteAsset(id) {
+      appData.assets = appData.assets.filter(a => a.id !== id);
+      saveData();
+    }
+    function deleteTx(id) {
+      appData.transactions = appData.transactions.filter(t => t.id !== id);
+      saveData();
+    }
+
+    // Render Mastery (Habits & OKRs)
+    function renderMastery() {
+      const fHabits = document.getElementById('full-habits-list');
+      fHabits.innerHTML = '';
+      appData.habits.forEach(h => {
+        const item = document.createElement('div');
+        item.className = `flex items-center justify-between p-3.5 rounded-xl border cursor-pointer transition ${h.completed ? 'bg-elevated border-cyancyber/40' : 'bg-midnight border-bordersubtle'}`;
+        item.onclick = () => toggleHabit(h.id);
+        item.innerHTML = `
+          <div class="flex items-center space-x-3">
+            <div class="w-6 h-6 rounded-full flex items-center justify-center ${h.completed ? 'bg-cyancyber text-obsidian font-bold' : 'border border-slate-500 text-transparent'}">
+              ✓
+            </div>
+            <div>
+              <div class="text-sm font-semibold ${h.completed ? 'text-white' : 'text-slate-300'}">${h.title}</div>
+              <div class="text-xs text-slate-400">${h.category} • Série : <b class="text-goldglow">${h.streak} jours</b></div>
+            </div>
+          </div>
+          <button onclick="event.stopPropagation(); deleteHabit(${h.id})" class="text-slate-500 hover:text-coralred text-xs px-2">✕</button>
+        `;
+        fHabits.appendChild(item);
+      });
+
+      const oList = document.getElementById('okrs-list');
+      oList.innerHTML = '';
+      appData.okrs.forEach(o => {
+        const ratio = Math.min(100, Math.round((o.current / o.target) * 100));
+        const item = document.createElement('div');
+        item.className = 'p-4 rounded-xl bg-midnight border border-bordersubtle space-y-2';
+        item.innerHTML = `
+          <div class="flex justify-between items-center">
+            <span class="text-sm font-bold text-white">${o.title}</span>
+            <span class="text-xs text-goldglow font-bold">${ratio}% (${o.current} / ${o.target} ${o.unit})</span>
+          </div>
+          <div class="w-full bg-cardbg h-2.5 rounded-full overflow-hidden">
+            <div class="bg-goldaccent h-full rounded-full transition-all" style="width: ${ratio}%;"></div>
+          </div>
+          <div class="flex justify-end space-x-2 pt-1">
+            <button onclick="stepOkr(${o.id}, -1)" class="px-2.5 py-1 text-xs bg-cardbg hover:bg-elevated text-slate-300 rounded-lg border border-bordersubtle">-1</button>
+            <button onclick="stepOkr(${o.id}, 1)" class="px-2.5 py-1 text-xs bg-goldaccent hover:bg-yellow-300 text-obsidian font-bold rounded-lg">+1</button>
+            <button onclick="deleteOkr(${o.id})" class="text-xs text-slate-500 hover:text-coralred px-2">Supprimer</button>
+          </div>
+        `;
+        oList.appendChild(item);
+      });
+    }
+
+    function stepOkr(id, delta) {
+      const o = appData.okrs.find(item => item.id === id);
+      if (o) {
+        o.current = Math.max(0, o.current + delta);
+        saveData();
+      }
+    }
+    function deleteHabit(id) {
+      appData.habits = appData.habits.filter(h => h.id !== id);
+      saveData();
+    }
+    function deleteOkr(id) {
+      appData.okrs = appData.okrs.filter(o => o.id !== id);
+      saveData();
+    }
+
+    // Render Principles & Journal
+    function renderPrinciplesAndJournal() {
+      const pList = document.getElementById('principles-list');
+      pList.innerHTML = '';
+      appData.principles.forEach(p => {
+        const item = document.createElement('div');
+        item.className = 'p-5 rounded-2xl bg-cardbg border border-bordersubtle space-y-2';
+        item.innerHTML = `
+          <div class="flex justify-between items-center">
+            <span class="text-[10px] font-bold text-goldglow bg-goldaccent/20 px-2 py-0.5 rounded border border-goldaccent/30">${p.tag}</span>
+            <span class="text-xs text-slate-400">${p.author}</span>
+          </div>
+          <h4 class="text-sm font-bold text-white">${p.title}</h4>
+          <p class="text-xs text-slate-400">${p.desc}</p>
+          <div class="p-2.5 bg-midnight rounded-xl text-xs text-emeraldglow font-medium border border-bordersubtle">
+            ⚡ Action Exécutive : ${p.action}
+          </div>
+        `;
+        pList.appendChild(item);
+      });
+
+      const jList = document.getElementById('journal-list');
+      jList.innerHTML = '';
+      appData.journal.forEach(j => {
+        const item = document.createElement('div');
+        item.className = 'p-4 rounded-xl bg-midnight border border-bordersubtle space-y-2';
+        item.innerHTML = `
+          <div class="flex justify-between items-center">
+            <span class="text-xs font-bold text-goldglow">${j.date}</span>
+            <button onclick="deleteJournal(${j.id})" class="text-xs text-slate-500 hover:text-coralred">✕</button>
+          </div>
+          <div class="text-xs text-slate-300"><b>Victoires :</b> ${j.wins}</div>
+          <div class="text-xs text-slate-400"><b>Leçon :</b> ${j.lesson}</div>
+        `;
+        jList.appendChild(item);
+      });
+    }
+
+    function deleteJournal(id) {
+      appData.journal = appData.journal.filter(j => j.id !== id);
+      saveData();
+    }
+
+    // Run FIRE Simulation
+    function runSimulation() {
+      const initCap = parseFloat(document.getElementById('input-init-cap').value);
+      const monthly = parseFloat(document.getElementById('input-monthly-savings').value);
+      const rate = parseFloat(document.getElementById('input-return-rate').value) / 100 / 12;
+      const years = parseInt(document.getElementById('input-horizon').value);
+      const expenses = parseFloat(document.getElementById('input-expenses').value);
+
+      document.getElementById('label-init-cap').textContent = formatCur(initCap);
+      document.getElementById('label-monthly-savings').textContent = formatCur(monthly) + ' / mois';
+      document.getElementById('label-return-rate').textContent = (rate * 12 * 100).toFixed(1) + ' %';
+      document.getElementById('label-horizon').textContent = years + ' ans';
+      document.getElementById('label-expenses').textContent = formatCur(expenses) + ' / an';
+
+      const months = years * 12;
+      const fvInit = initCap * Math.pow(1 + rate, months);
+      const fvAnnuity = monthly * ((Math.pow(1 + rate, months) - 1) / rate);
+      const finalCap = fvInit + fvAnnuity;
+
+      const totalInvested = initCap + (monthly * months);
+      const totalGains = Math.max(0, finalCap - totalInvested);
+      const fireTarget = expenses * 25;
+
+      let yearsToFire = 25;
+      if (monthly > 0 && rate > 0 && fireTarget > initCap) {
+        yearsToFire = Math.log((fireTarget * rate + monthly) / (initCap * rate + monthly)) / (Math.log(1 + rate) * 12);
+      } else if (initCap >= fireTarget) {
+        yearsToFire = 0;
+      }
+
+      document.getElementById('sim-final-capital').textContent = formatCur(finalCap);
+      document.getElementById('sim-total-gains').textContent = '+' + formatCur(totalGains);
+      document.getElementById('sim-invested').textContent = formatCur(totalInvested);
+      document.getElementById('sim-fire-target').textContent = formatCur(fireTarget);
+      document.getElementById('sim-years-to-fire').textContent = yearsToFire <= 0 ? 'Atteint !' : yearsToFire.toFixed(1) + ' ans';
+    }
+
+    // Modals
+    function openModal(id) { document.getElementById(id).classList.remove('hidden'); }
+    function closeModal(id) { document.getElementById(id).classList.add('hidden'); }
+
+    function saveAsset() {
+      const name = document.getElementById('asset-name').value;
+      const val = parseFloat(document.getElementById('asset-value').value);
+      const cat = document.getElementById('asset-cat').value;
+      if (name && !isNaN(val)) {
+        appData.assets.push({ id: Date.now(), name, value: val, category: cat, isLiability: cat === 'DETTE_PASSIF' });
+        closeModal('modal-asset');
+        saveData();
+      }
+    }
+
+    function saveTx() {
+      const title = document.getElementById('tx-title').value;
+      const amount = parseFloat(document.getElementById('tx-amount').value);
+      const type = document.getElementById('tx-type').value;
+      const cat = document.getElementById('tx-cat').value;
+      if (title && !isNaN(amount)) {
+        appData.transactions.push({ id: Date.now(), title, amount, type, category: cat });
+        closeModal('modal-tx');
+        saveData();
+      }
+    }
+
+    function saveHabit() {
+      const title = document.getElementById('habit-title').value;
+      const cat = document.getElementById('habit-cat').value;
+      if (title) {
+        appData.habits.push({ id: Date.now(), title, category: cat, streak: 0, completed: false, weight: 10 });
+        closeModal('modal-habit');
+        saveData();
+      }
+    }
+
+    function saveOkr() {
+      const title = document.getElementById('okr-title').value;
+      const cur = parseFloat(document.getElementById('okr-cur').value) || 0;
+      const tgt = parseFloat(document.getElementById('okr-tgt').value) || 100;
+      const unit = document.getElementById('okr-unit').value || '€';
+      if (title) {
+        appData.okrs.push({ id: Date.now(), title, current: cur, target: tgt, unit });
+        closeModal('modal-okr');
+        saveData();
+      }
+    }
+
+    function saveJournal() {
+      const wins = document.getElementById('journal-wins').value;
+      const lesson = document.getElementById('journal-lesson').value;
+      if (wins || lesson) {
+        appData.journal.unshift({ id: Date.now(), date: "Aujourd'hui", wins: wins || "Discipline quotidienne validée.", lesson: lesson || "Amélioration continue." });
+        closeModal('modal-journal');
+        saveData();
+      }
+    }
+
+    function renderAll() {
+      renderDashboard();
+      renderFinances();
+      renderMastery();
+      renderPrinciplesAndJournal();
+      runSimulation();
+    }
+
+    // Initial boot
+    renderAll();
+  </script>
+</body>
+</html>

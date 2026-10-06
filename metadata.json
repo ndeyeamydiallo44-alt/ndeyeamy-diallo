@@ -1,0 +1,6 @@
+{
+  "name": "Ascend Pro",
+  "description": "Plateforme SaaS ultra professionnelle alliant développement financier, gestion de patrimoine, objectifs de vie et routines d'excellence personnelle.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
